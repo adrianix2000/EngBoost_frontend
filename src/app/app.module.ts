@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './modules/core/components/navbar/navbar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from './modules/core/core.module';
+import { AuthorizationModule } from './modules/authorization/authorization.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -14,6 +15,7 @@ import { CoreModule } from './modules/core/core.module';
     AppRoutingModule,
     BrowserAnimationsModule,
     CoreModule,
+    AuthorizationModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
