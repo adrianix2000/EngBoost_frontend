@@ -1,0 +1,66 @@
+<div class="register-wrapper mt-3">
+  <form>
+    <div>
+      <div class="d-flex justify-content-center">
+        <h2>Tworzenie konta</h2>
+      </div>
+      <p class="border-bottom"></p>
+
+      <div class="d-flex">
+        <div style="margin-right: 8px">
+          <mat-form-field>
+            <mat-label>Imie</mat-label>
+            <input matInput formControlName="username" />
+            <!-- <mat-error *ngIf="controls.username.invalid">{{
+            getErrorMessage(controls.username)
+          }}</mat-error> -->
+          </mat-form-field>
+        </div>
+        <mat-form-field>
+          <mat-label>Nazwisko</mat-label>
+          <input matInput formControlName="username" />
+          <!-- <mat-error *ngIf="controls.username.invalid">{{
+              getErrorMessage(controls.username)
+            }}</mat-error> -->
+        </mat-form-field>
+      </div>
+
+      <mat-form-field>
+        <mat-label>Nazwa użytkownika</mat-label>
+        <input matInput formControlName="username" />
+        <!-- <mat-error *ngIf="controls.username.invalid">{{
+            getErrorMessage(controls.username)
+          }}</mat-error> -->
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>Enter your email</mat-label>
+        <input matInput placeholder="adres@gmail.com" required />
+        <!-- <mat-error *ngIf="email.invalid">{{ getErrorMessage() }}</mat-error> -->
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>Hasło</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" />
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="hide = !hide"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide"
+          type="button"
+        >
+          <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+
+    <div class="d-flex justify-content-end mb-2">
+      <button mat-raised-button color="primary" type="submit">
+        Zaloguj się
+      </button>
+    </div>
+  </form>
+</div>
