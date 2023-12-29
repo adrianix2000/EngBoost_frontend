@@ -1,66 +1,103 @@
 <div class="register-wrapper mt-3">
-  <form>
+  <form [formGroup]="registrationForm" (ngSubmit)="RegisterAction()">
     <div>
       <div class="d-flex justify-content-center">
         <h2>Tworzenie konta</h2>
       </div>
       <p class="border-bottom"></p>
 
-      <div class="d-flex">
+      <div class="d-flex mb-2">
         <div style="margin-right: 8px">
           <mat-form-field>
             <mat-label>Imie</mat-label>
-            <input matInput formControlName="username" />
-            <!-- <mat-error *ngIf="controls.username.invalid">{{
-            getErrorMessage(controls.username)
-          }}</mat-error> -->
+            <input matInput formControlName="firstname" />
+            <mat-error *ngIf="registrationForm.controls.firstname">{{
+              getErrorMessage(registrationForm.controls.firstname)
+            }}</mat-error>
           </mat-form-field>
         </div>
         <mat-form-field>
           <mat-label>Nazwisko</mat-label>
-          <input matInput formControlName="username" />
-          <!-- <mat-error *ngIf="controls.username.invalid">{{
-              getErrorMessage(controls.username)
-            }}</mat-error> -->
+          <input matInput formControlName="lastname" />
+          <mat-error *ngIf="registrationForm.controls.lastname.invalid">{{
+            getErrorMessage(registrationForm.controls.lastname)
+          }}</mat-error>
         </mat-form-field>
       </div>
 
-      <mat-form-field>
-        <mat-label>Nazwa użytkownika</mat-label>
-        <input matInput formControlName="username" />
-        <!-- <mat-error *ngIf="controls.username.invalid">{{
-            getErrorMessage(controls.username)
-          }}</mat-error> -->
-      </mat-form-field>
-    </div>
-    <div>
-      <mat-form-field appearance="fill">
-        <mat-label>Enter your email</mat-label>
-        <input matInput placeholder="adres@gmail.com" required />
-        <!-- <mat-error *ngIf="email.invalid">{{ getErrorMessage() }}</mat-error> -->
-      </mat-form-field>
-    </div>
-    <div>
-      <mat-form-field appearance="fill">
-        <mat-label>Hasło</mat-label>
-        <input matInput [type]="hide ? 'password' : 'text'" />
-        <button
-          mat-icon-button
-          matSuffix
-          (click)="hide = !hide"
-          [attr.aria-label]="'Hide password'"
-          [attr.aria-pressed]="hide"
-          type="button"
-        >
-          <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
-        </button>
-      </mat-form-field>
-    </div>
+      <div class="mb-2">
+        <mat-form-field>
+          <mat-label>Nazwa użytkownika</mat-label>
+          <input matInput formControlName="username" />
+          <mat-error *ngIf="registrationForm.controls.username.invalid">{{
+            getErrorMessage(registrationForm.controls.username)
+          }}</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="mb-2">
+        <mat-form-field appearance="fill">
+          <mat-label>Adres e-mail</mat-label>
+          <input
+            matInput
+            placeholder="adres@gmail.com"
+            required
+            formControlName="email"
+          />
+          <mat-error *ngIf="registrationForm.controls.email.invalid">{{
+            getErrorMessage(registrationForm.controls.email)
+          }}</mat-error>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="fill">
+          <mat-label>Hasło</mat-label>
+          <input
+            matInput
+            [type]="hide ? 'password' : 'text'"
+            formControlName="password"
+          />
+          <button
+            mat-icon-button
+            matSuffix
+            (click)="hide = !hide"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide"
+            type="button"
+          >
+            <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+          </button>
 
-    <div class="d-flex justify-content-end mb-2">
-      <button mat-raised-button color="primary" type="submit">
-        Zaloguj się
-      </button>
+          <mat-progress-bar
+            mode="determinate"
+            class="audio-progress-bar"
+            [value]="passwordStrengthLevel"
+          >
+          </mat-progress-bar>
+
+          <mat-error *ngIf="registrationForm.controls.password.invalid">{{
+            getErrorMessage(registrationForm.controls.password)
+          }}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="d-flex justify-content-end mb-2 mt-4">
+        <button
+          mat-raised-button
+          color="primary"
+          style="margin-right: 5px"
+          (click)="registrationForm.reset()"
+        >
+          Wyczyść formularz
+        </button>
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          [disabled]="registrationForm.invalid"
+        >
+          Zarejestruj konto
+        </button>
+      </div>
     </div>
   </form>
 </div>

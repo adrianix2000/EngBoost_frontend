@@ -11,6 +11,8 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatListModule } from '@angular/material/list';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [],
@@ -27,6 +29,8 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
     MatPaginatorModule,
     MatMenuModule,
     MatListModule,
+    ReactiveFormsModule,
+    MatProgressBarModule,
   ],
 })
 export class SharedModule {}
