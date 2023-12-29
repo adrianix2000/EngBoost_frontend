@@ -69,7 +69,8 @@
 
           <mat-progress-bar
             mode="determinate"
-            class="audio-progress-bar"
+            color="{{ currentProgresBarColor }}"
+            class="green-progress"
             [value]="passwordStrengthLevel"
           >
           </mat-progress-bar>
@@ -86,6 +87,7 @@
           color="primary"
           style="margin-right: 5px"
           (click)="registrationForm.reset()"
+          [disabled]="!registrationForm.dirty"
         >
           Wyczyść formularz
         </button>

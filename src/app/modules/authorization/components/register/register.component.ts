@@ -9,6 +9,9 @@ import { MatError } from '@angular/material/form-field';
 })
 export class RegisterComponent implements OnInit {
   hide = true;
+  passwordStrengthLevel: number = 0;
+  currentProgresBarColor = 'warn';
+  isFormDirty = false;
 
   registrationForm = new FormGroup({
     firstname: new FormControl('', {
@@ -46,8 +49,6 @@ export class RegisterComponent implements OnInit {
     }),
   });
 
-  passwordStrengthLevel: number = 0;
-
   ngOnInit(): void {
     this.registrationForm.controls.password.valueChanges.subscribe({
       next: (currentPassword) => {
@@ -57,10 +58,6 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  passwordValidatator = {
-    hasLenght: false,
-  };
-
   changePasswordStrenght(currentPassword: string): void {
     this.passwordStrengthLevel =
       (currentPassword.length > 7 ? 20 : 0) +
@@ -68,6 +65,17 @@ export class RegisterComponent implements OnInit {
       (/[A-Z]/.test(currentPassword) ? 20 : 0) +
       (/[1-9]/.test(currentPassword) ? 20 : 0) +
       (/[^a-zA-Z0-9]/.test(currentPassword) ? 20 : 0);
+
+    if (this.passwordStrengthLevel <= 33) {
+      this.currentProgresBarColor = 'warn';
+    } else if (
+      this.passwordStrengthLevel > 33 &&
+      this.passwordStrengthLevel <= 66
+    ) {
+      this.currentProgresBarColor = 'accent';
+    } else {
+      this.currentProgresBarColor = 'primary';
+    }
   }
 
   RegisterAction(): void {
@@ -94,4 +102,6 @@ export class RegisterComponent implements OnInit {
 
     return '';
   }
+
+  clearForm(): void {}
 }
