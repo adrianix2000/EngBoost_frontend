@@ -10,17 +10,17 @@
         <div style="margin-right: 8px">
           <mat-form-field>
             <mat-label>Imie</mat-label>
-            <input matInput formControlName="firstname" />
-            <mat-error *ngIf="registrationForm.controls.firstname">{{
-              getErrorMessage(registrationForm.controls.firstname)
+            <input matInput formControlName="firstName" />
+            <mat-error *ngIf="registrationForm.controls.firstName">{{
+              getErrorMessage(registrationForm.controls.firstName)
             }}</mat-error>
           </mat-form-field>
         </div>
         <mat-form-field>
           <mat-label>Nazwisko</mat-label>
-          <input matInput formControlName="lastname" />
-          <mat-error *ngIf="registrationForm.controls.lastname.invalid">{{
-            getErrorMessage(registrationForm.controls.lastname)
+          <input matInput formControlName="lastName" />
+          <mat-error *ngIf="registrationForm.controls.lastName.invalid">{{
+            getErrorMessage(registrationForm.controls.lastName)
           }}</mat-error>
         </mat-form-field>
       </div>
@@ -28,9 +28,9 @@
       <div class="mb-2">
         <mat-form-field>
           <mat-label>Nazwa użytkownika</mat-label>
-          <input matInput formControlName="username" />
-          <mat-error *ngIf="registrationForm.controls.username.invalid">{{
-            getErrorMessage(registrationForm.controls.username)
+          <input matInput formControlName="userName" />
+          <mat-error *ngIf="registrationForm.controls.userName.invalid">{{
+            getErrorMessage(registrationForm.controls.userName)
           }}</mat-error>
         </mat-form-field>
       </div>

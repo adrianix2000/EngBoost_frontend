@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatError } from '@angular/material/form-field';
+import { Router } from '@angular/router';
+import { userRegisterEntity } from 'src/app/modules/core/models/user.model';
+import { RegistrationService } from 'src/app/modules/core/services/registration.service';
 
 @Component({
   selector: 'app-register',
@@ -14,7 +17,7 @@ export class RegisterComponent implements OnInit {
   isFormDirty = false;
 
   registrationForm = new FormGroup({
-    firstname: new FormControl('', {
+    firstName: new FormControl('', {
       validators: [
         Validators.required,
         Validators.minLength(2),
@@ -22,7 +25,7 @@ export class RegisterComponent implements OnInit {
       ],
       nonNullable: true,
     }),
-    lastname: new FormControl('', {
+    lastName: new FormControl('', {
       validators: [
         Validators.required,
         Validators.minLength(2),
@@ -39,7 +42,7 @@ export class RegisterComponent implements OnInit {
       ],
       nonNullable: true,
     }),
-    username: new FormControl('', {
+    userName: new FormControl('', {
       validators: [Validators.required],
       nonNullable: true,
     }),
@@ -48,6 +51,13 @@ export class RegisterComponent implements OnInit {
       nonNullable: true,
     }),
   });
+
+  constructor(
+    private registrationService: RegistrationService,
+    private router: Router
+  ) {
+    console.log('hello world');
+  }
 
   ngOnInit(): void {
     this.registrationForm.controls.password.valueChanges.subscribe({
@@ -79,8 +89,18 @@ export class RegisterComponent implements OnInit {
   }
 
   RegisterAction(): void {
-    const userdata = this.registrationForm.getRawValue();
-    console.log(userdata.email);
+    const userdata: userRegisterEntity = this.registrationForm.getRawValue();
+
+    this.registrationService.register(userdata).subscribe({
+      next: (value) => {
+        console.log(value);
+        //this.router.navigate(['/logowanie']);
+        console.log('Wszytsko git');
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 
   getErrorMessage(control: FormControl) {
