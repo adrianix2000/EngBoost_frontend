@@ -14,6 +14,7 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { RouterModule } from '@angular/router';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [],
@@ -33,6 +34,7 @@ import { RouterModule } from '@angular/router';
     ReactiveFormsModule,
     MatProgressBarModule,
     RouterModule,
+    MatDialogModule,
   ],
 })
 export class SharedModule {}

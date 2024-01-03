@@ -5,9 +5,10 @@ import { SharedModule } from '../shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { RegistrationService } from './services/registration.service';
+import { DialogCloseComponent } from './components/dialog-close/dialog-close.component';
 
 @NgModule({
-  declarations: [NavbarComponent],
+  declarations: [NavbarComponent, DialogCloseComponent],
   providers: [RegistrationService],
   imports: [SharedModule, RouterModule, HttpClientModule],
   exports: [NavbarComponent],

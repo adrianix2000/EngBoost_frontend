@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatError } from '@angular/material/form-field';
 import { Router } from '@angular/router';
+import { DialogCloseComponent } from 'src/app/modules/core/components/dialog-close/dialog-close.component';
 import { userRegisterEntity } from 'src/app/modules/core/models/user.model';
 import { RegistrationService } from 'src/app/modules/core/services/registration.service';
 
@@ -54,9 +56,14 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private registrationService: RegistrationService,
-    private router: Router
+    private router: Router,
+    public dialog: MatDialog
   ) {
     console.log('hello world');
+  }
+
+  openDialog() {
+    this.dialog.open(DialogCloseComponent);
   }
 
   ngOnInit(): void {
@@ -88,9 +95,12 @@ export class RegisterComponent implements OnInit {
     }
   }
 
+  requestProcessing: boolean = false;
+
   RegisterAction(): void {
     const userdata: userRegisterEntity = this.registrationForm.getRawValue();
 
+    this.requestProcessing = true;
     this.registrationService.register(userdata).subscribe({
       next: (value) => {
         console.log(value);
@@ -99,6 +109,9 @@ export class RegisterComponent implements OnInit {
       },
       error: (err) => {
         console.log(err);
+        console.log('koniec prztwarzania');
+        this.requestProcessing = false;
+        this.openDialog();
       },
     });
   }

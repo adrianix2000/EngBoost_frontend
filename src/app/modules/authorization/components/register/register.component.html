@@ -81,7 +81,7 @@
         </mat-form-field>
       </div>
 
-      <div class="d-flex justify-content-end mb-2 mt-4">
+      <div class="d-flex justify-content-end mb-2 mt-5">
         <button
           mat-raised-button
           color="primary"
@@ -95,11 +95,16 @@
           mat-raised-button
           color="primary"
           type="submit"
-          [disabled]="registrationForm.invalid"
+          [disabled]="registrationForm.invalid || requestProcessing"
         >
           Zarejestruj konto
         </button>
       </div>
+      <!-- <p *ngIf="requestProcessing">Trwa przetwarzanie</p> -->
+      <mat-progress-bar
+        *ngIf="requestProcessing"
+        mode="indeterminate"
+      ></mat-progress-bar>
     </div>
   </form>
 </div>
