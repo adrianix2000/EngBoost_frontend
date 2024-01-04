@@ -5,3 +5,8 @@ export interface userRegisterEntity {
   password: string;
   email: string;
 }
+
+export interface userLoginRequest {
+  username: string;
+  password: string;
+}

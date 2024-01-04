@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Inject, Input } from '@angular/core';
 import {
+  MAT_DIALOG_DATA,
   MatDialog,
   MatDialogActions,
   MatDialogClose,
@@ -12,4 +13,8 @@ import {
   templateUrl: './dialog-close.component.html',
   styleUrls: ['./dialog-close.component.scss'],
 })
-export class DialogCloseComponent {}
+export class DialogCloseComponent {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
+    console.log(this.data.title);
+  }
+}

@@ -58,12 +58,15 @@ export class RegisterComponent implements OnInit {
     private registrationService: RegistrationService,
     private router: Router,
     public dialog: MatDialog
-  ) {
-    console.log('hello world');
-  }
+  ) {}
 
-  openDialog() {
-    this.dialog.open(DialogCloseComponent);
+  openDialog(title: string, inforrmation: string) {
+    this.dialog.open(DialogCloseComponent, {
+      data: {
+        title: title,
+        information: inforrmation,
+      },
+    });
   }
 
   ngOnInit(): void {
@@ -108,10 +111,29 @@ export class RegisterComponent implements OnInit {
         console.log('Wszytsko git');
       },
       error: (err) => {
-        console.log(err);
-        console.log('koniec prztwarzania');
+        let errorStatus: number = err.status;
+
+        if (errorStatus == 201) {
+          this.openDialog(
+            'Operacja zakończona skucesem',
+            'Utworzono nowego użytkownika'
+          );
+        } else if (errorStatus == 409) {
+          this.openDialog(
+            'Błąd',
+            'Operacja nie powiodła się. Istnieje już użytkownik z podaną nazwą użytkownika'
+          );
+        } else {
+          this.openDialog(
+            'Błąd',
+            'Wystąpił niezidentyfikowany błąd. Spróbuj ponowanie'
+          );
+        }
+
         this.requestProcessing = false;
-        this.openDialog();
+      },
+      complete: () => {
+        this.requestProcessing = false;
       },
     });
   }
