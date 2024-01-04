@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { userLoginRequest } from 'src/app/modules/core/models/user.model';
+import { RegistrationService } from 'src/app/modules/core/services/registration.service';
 
 @Component({
   selector: 'app-login',
@@ -9,6 +10,8 @@ import { userLoginRequest } from 'src/app/modules/core/models/user.model';
 })
 export class LoginComponent {
   hide = true;
+
+  constructor(private authService: RegistrationService) {}
 
   loginForm = new FormGroup({
     username: new FormControl('', {
@@ -24,6 +27,13 @@ export class LoginComponent {
   loginAction(): void {
     const loginData: userLoginRequest = this.loginForm.getRawValue();
 
-    console.log(loginData);
+    this.authService.login(loginData).subscribe({
+      next: (value) => {
+        console.log(value);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 }
