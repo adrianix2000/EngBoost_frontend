@@ -108,17 +108,16 @@ export class RegisterComponent implements OnInit {
       next: (value) => {
         console.log(value);
         //this.router.navigate(['/logowanie']);
-        console.log('Wszytsko git');
+        // console.log('Wszytsko git');
+        this.openDialog(
+          'Operacja zakończona skucesem',
+          'Utworzono nowego użytkownika'
+        );
       },
       error: (err) => {
         let errorStatus: number = err.status;
 
-        if (errorStatus == 201) {
-          this.openDialog(
-            'Operacja zakończona skucesem',
-            'Utworzono nowego użytkownika'
-          );
-        } else if (errorStatus == 409) {
+        if (errorStatus == 400) {
           this.openDialog(
             'Błąd',
             'Operacja nie powiodła się. Istnieje już użytkownik z podaną nazwą użytkownika'
