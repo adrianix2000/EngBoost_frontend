@@ -7,6 +7,7 @@ import { NavbarComponent } from './modules/core/components/navbar/navbar.compone
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from './modules/core/core.module';
 import { AuthorizationModule } from './modules/authorization/authorization.module';
+import { HomeModule } from './modules/home/home.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -16,6 +17,7 @@ import { AuthorizationModule } from './modules/authorization/authorization.modul
     BrowserAnimationsModule,
     CoreModule,
     AuthorizationModule,
+    HomeModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { DialogCloseComponent } from 'src/app/modules/core/components/dialog-close/dialog-close.component';
 import { userLoginRequest } from 'src/app/modules/core/models/user.model';
 import { RegistrationService } from 'src/app/modules/core/services/registration.service';
+import { TokenService } from 'src/app/modules/core/services/token.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +17,9 @@ export class LoginComponent {
 
   constructor(
     private authService: RegistrationService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private tokenService: TokenService,
+    private router: Router
   ) {}
 
   loginForm = new FormGroup({
@@ -45,6 +49,8 @@ export class LoginComponent {
       next: (value) => {
         let token: string = value.token;
         console.log(token);
+        this.tokenService.setToken(token);
+        this.router.navigate(['/pulpit']);
       },
       error: (err) => {
         let errorStatus: number = err.status;
