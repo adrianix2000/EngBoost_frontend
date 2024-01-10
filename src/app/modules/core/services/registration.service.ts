@@ -14,17 +14,17 @@ export class RegistrationService {
   }
 
   login(userData: userLoginRequest): Observable<any> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: 'Bearer your_access_token', // Dodaj tutaj odpowiedni token dostępu
-    });
+    // const headers = new HttpHeaders({
+    //   'Content-Type': 'application/json',
+    //   Authorization: 'Bearer your_access_token', // Dodaj tutaj odpowiedni token dostępu
+    // });
 
-    const options = { headers: headers };
+    // const options = { headers: headers };
 
     return this.http.post<any>(
       'http://localhost:8080/login',
-      userData,
-      options
+      userData
+      // options
     );
   }
 }

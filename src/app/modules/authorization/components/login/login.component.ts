@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogCloseComponent } from 'src/app/modules/core/components/dialog-close/dialog-close.component';
 import { userLoginRequest } from 'src/app/modules/core/models/user.model';
 import { RegistrationService } from 'src/app/modules/core/services/registration.service';
 
@@ -11,7 +13,10 @@ import { RegistrationService } from 'src/app/modules/core/services/registration.
 export class LoginComponent {
   hide = true;
 
-  constructor(private authService: RegistrationService) {}
+  constructor(
+    private authService: RegistrationService,
+    public dialog: MatDialog
+  ) {}
 
   loginForm = new FormGroup({
     username: new FormControl('', {
@@ -24,15 +29,37 @@ export class LoginComponent {
     }),
   });
 
+  openDialog(title: string, inforrmation: string) {
+    this.dialog.open(DialogCloseComponent, {
+      data: {
+        title: title,
+        information: inforrmation,
+      },
+    });
+  }
+
   loginAction(): void {
     const loginData: userLoginRequest = this.loginForm.getRawValue();
 
     this.authService.login(loginData).subscribe({
       next: (value) => {
-        console.log(value);
+        let token: string = value.token;
+        console.log(token);
       },
       error: (err) => {
-        console.log(err);
+        let errorStatus: number = err.status;
+
+        if (errorStatus == 404) {
+          this.openDialog(
+            'Błąd',
+            'Operacja nie powiodła się. Nie istnieje użytkownik o podanych danych'
+          );
+        } else {
+          this.openDialog(
+            'Błąd',
+            'Wystąpił niezidentyfikowany błąd. Spróbuj ponowanie'
+          );
+        }
       },
     });
   }
