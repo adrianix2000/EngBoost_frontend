@@ -9,7 +9,7 @@ import { TokenService } from '../../services/token.service';
 export class NavbarComponent implements OnInit {
   constructor(public tokenService: TokenService) {}
 
-  showLogoutButton!: boolean;
+  showLogoutButton: boolean = this.tokenService.isTokenExists();
 
   logout(): void {
     this.tokenService.destroyToken();
