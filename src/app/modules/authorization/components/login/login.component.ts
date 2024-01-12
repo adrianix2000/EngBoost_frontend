@@ -42,9 +42,12 @@ export class LoginComponent {
     });
   }
 
+  requestProcessing: boolean = false;
+
   loginAction(): void {
     const loginData: userLoginRequest = this.loginForm.getRawValue();
 
+    this.requestProcessing = true;
     this.authService.login(loginData).subscribe({
       next: (value) => {
         let token: string = value.token;
@@ -66,6 +69,10 @@ export class LoginComponent {
             'Wystąpił niezidentyfikowany błąd. Spróbuj ponowanie'
           );
         }
+        this.requestProcessing = false;
+      },
+      complete: () => {
+        this.requestProcessing = false;
       },
     });
   }
