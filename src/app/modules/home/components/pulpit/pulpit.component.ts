@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { SessionService } from 'src/app/modules/core/services/session.service';
 import { TokenService } from 'src/app/modules/core/services/token.service';
 import { UserService } from 'src/app/modules/core/services/user.service';
 
@@ -12,6 +13,7 @@ export class PulpitComponent implements OnInit {
   constructor(
     private userService: UserService,
     private tokenService: TokenService,
+    private sessionService: SessionService,
     private router: Router
   ) {}
 
@@ -19,7 +21,7 @@ export class PulpitComponent implements OnInit {
     if (!this.tokenService.isTokenExists()) {
       this.router.navigate(['/logowanie']);
     } else {
-      this.userService.getUsers().subscribe({
+      this.sessionService.getUsersSessions().subscribe({
         next: (value) => {
           console.log(value);
         },
