@@ -6,6 +6,7 @@ import { DialogCloseComponent } from 'src/app/modules/core/components/dialog-clo
 import { userLoginRequest } from 'src/app/modules/core/models/user.model';
 import { RegistrationService } from 'src/app/modules/core/services/registration.service';
 import { TokenService } from 'src/app/modules/core/services/token.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-login',
