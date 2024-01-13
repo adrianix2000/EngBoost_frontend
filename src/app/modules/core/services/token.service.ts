@@ -21,6 +21,10 @@ export class TokenService {
   }
 
   getUserName(): string {
+    let token = localStorage.getItem('token');
+    if (token != null) {
+      this.decodedToken = this.helper.decodeToken(token);
+    }
     return this.decodedToken.sub;
   }
 

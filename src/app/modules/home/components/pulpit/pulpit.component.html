@@ -1,1 +1,9 @@
-<p>pulpit works!</p>
+<div class="container mt-4">
+  <div class="d-flex justify-content-center">
+    <h1>Twoje sesje</h1>
+  </div>
+
+  <ul *ngFor="let session of userSessions; index as i">
+    <li>{{ session.title }}</li>
+  </ul>
+</div>
