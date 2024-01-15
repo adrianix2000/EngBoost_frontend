@@ -3,6 +3,8 @@
     <h1>Twoje sesje</h1>
   </div>
 
+  <div class="line-shadow mb-4"></div>
+
   <ng-container *ngFor="let session of userSessions; index as i">
     <mat-card>
       <mat-card-header>
@@ -15,4 +17,10 @@
       </mat-card-actions>
     </mat-card>
   </ng-container>
+
+  <div class="d-flex justify-content-end mt-4">
+    <button mat-raised-button color="primary" (click)="openDialog()">
+      Dodaj sesję
+    </button>
+  </div>
 </div>

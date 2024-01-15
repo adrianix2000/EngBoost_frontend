@@ -16,6 +16,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { RouterModule } from '@angular/router';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [],
@@ -37,6 +38,7 @@ import { MatCardModule } from '@angular/material/card';
     RouterModule,
     MatDialogModule,
     MatCardModule,
+    FormsModule,
   ],
 })
 export class SharedModule {}

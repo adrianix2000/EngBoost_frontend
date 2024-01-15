@@ -1,0 +1,16 @@
+<div class="container">
+  <h1 mat-dialog-title>Dodawanie nowej sesji</h1>
+  <div mat-dialog-content>
+    <p>Podaj tytuł sesji np: Mechanical engineering</p>
+    <mat-form-field>
+      <mat-label>tytuł</mat-label>
+      <input matInput [(ngModel)]="data.animal" />
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Anuluj</button>
+    <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>
+      Ok
+    </button>
+  </div>
+</div>
