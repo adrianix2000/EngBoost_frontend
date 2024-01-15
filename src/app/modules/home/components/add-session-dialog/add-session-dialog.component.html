@@ -4,13 +4,11 @@
     <p>Podaj tytuł sesji np: Mechanical engineering</p>
     <mat-form-field>
       <mat-label>tytuł</mat-label>
-      <input matInput [(ngModel)]="data.animal" />
+      <input matInput [(ngModel)]="data.title" />
     </mat-form-field>
   </div>
   <div mat-dialog-actions>
     <button mat-button (click)="onNoClick()">Anuluj</button>
-    <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>
-      Ok
-    </button>
+    <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
   </div>
 </div>

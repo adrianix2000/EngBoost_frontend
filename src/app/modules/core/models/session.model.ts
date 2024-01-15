@@ -6,3 +6,9 @@ export interface Session {
   username: string;
   viewnumber: number;
 }
+
+export interface SessionCreateRequest {
+  title: string;
+  username: string;
+  isshared: boolean;
+}

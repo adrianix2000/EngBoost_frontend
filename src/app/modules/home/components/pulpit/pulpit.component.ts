@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { Session } from 'src/app/modules/core/models/session.model';
+import {
+  Session,
+  SessionCreateRequest,
+} from 'src/app/modules/core/models/session.model';
 import { SessionService } from 'src/app/modules/core/services/session.service';
 import { TokenService } from 'src/app/modules/core/services/token.service';
 import { UserService } from 'src/app/modules/core/services/user.service';
@@ -42,19 +45,35 @@ export class PulpitComponent implements OnInit {
     }
   }
 
-  animal!: string;
-  name!: string;
+  sessionCreateRequest: SessionCreateRequest = {
+    title: '',
+    username: this.tokenService.getUserName(),
+    isshared: false,
+  };
 
   openDialog(): void {
     const dialogRef = this.dialog.open(AddSessionDialogComponent, {
-      data: { name: this.name, animal: this.animal },
+      data: {
+        title: '',
+      },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
       console.log('The dialog was closed');
-      this.animal = result;
 
-      console.log(this.animal);
+      if (result != undefined) {
+        this.sessionCreateRequest.title = result.title;
+
+        this.sessionService.createSession(this.sessionCreateRequest).subscribe({
+          next: (value) => {
+            console.log(value);
+            this.ngOnInit();
+          },
+          error: (err) => {
+            console.log(err);
+          },
+        });
+      }
     });
   }
 }
