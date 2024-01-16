@@ -12,7 +12,7 @@ export class AddSessionDialogComponent {
   constructor(
     public dialogRef: MatDialogRef<AddSessionDialogComponent>,
     @Inject(MAT_DIALOG_DATA)
-    public data: { title: string; isshared: boolean; uploadFilePath: string }
+    public data: { title: string; isshared: boolean; uploadFilePath: File }
   ) {}
 
   onNoClick(): void {
@@ -24,7 +24,7 @@ export class AddSessionDialogComponent {
   onFileSelected(event: any): void {
     const fileInput = event.target;
     if (fileInput.files.length > 0) {
-      this.data.uploadFilePath = fileInput.files[0].name;
+      this.data.uploadFilePath = fileInput.files[0];
     } else {
       this.selectedFilePath = '';
     }

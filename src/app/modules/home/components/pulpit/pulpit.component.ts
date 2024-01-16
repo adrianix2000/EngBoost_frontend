@@ -9,6 +9,7 @@ import { SessionService } from 'src/app/modules/core/services/session.service';
 import { TokenService } from 'src/app/modules/core/services/token.service';
 import { UserService } from 'src/app/modules/core/services/user.service';
 import { AddSessionDialogComponent } from '../add-session-dialog/add-session-dialog.component';
+import { WordService } from 'src/app/modules/core/services/word.service';
 
 export interface DialogData {
   animal: string;
@@ -26,7 +27,8 @@ export class PulpitComponent implements OnInit {
     private tokenService: TokenService,
     private sessionService: SessionService,
     private router: Router,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private wordService: WordService
   ) {}
 
   userSessions!: Session[];
@@ -50,7 +52,7 @@ export class PulpitComponent implements OnInit {
       data: {
         title: '',
         isshared: false,
-        uploadFilePath: '',
+        uploadFilePath: null,
       },
     });
 
@@ -64,9 +66,10 @@ export class PulpitComponent implements OnInit {
           isshared: result.isshared,
         };
 
-        console.log(result.uploadFilePath);
-        console.log(sessionCreateRequest);
+        // console.log(result.uploadFilePath);
+        // console.log(sessionCreateRequest);
 
+        let isError = false;
         this.sessionService.createSession(sessionCreateRequest).subscribe({
           next: (value) => {
             console.log(value);
@@ -74,8 +77,28 @@ export class PulpitComponent implements OnInit {
           },
           error: (err) => {
             console.log(err);
+            isError = true;
           },
         });
+
+        if (!isError) {
+          const formData = new FormData();
+
+          let file = result.uploadFilePath;
+
+          formData.append('file', file);
+
+          console.log(formData);
+
+          this.wordService.uploadFile(formData).subscribe({
+            next: (value) => {
+              console.log(value);
+            },
+            error: (err) => {
+              console.log(err);
+            },
+          });
+        }
       }
     });
   }
