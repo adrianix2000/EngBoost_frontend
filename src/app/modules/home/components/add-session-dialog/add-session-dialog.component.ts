@@ -11,10 +11,22 @@ import { SessionCreateRequest } from 'src/app/modules/core/models/session.model'
 export class AddSessionDialogComponent {
   constructor(
     public dialogRef: MatDialogRef<AddSessionDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { title: string }
+    @Inject(MAT_DIALOG_DATA)
+    public data: { title: string; isshared: boolean; uploadFilePath: string }
   ) {}
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+  selectedFilePath: string = '';
+
+  onFileSelected(event: any): void {
+    const fileInput = event.target;
+    if (fileInput.files.length > 0) {
+      this.data.uploadFilePath = fileInput.files[0].name;
+    } else {
+      this.selectedFilePath = '';
+    }
   }
 }

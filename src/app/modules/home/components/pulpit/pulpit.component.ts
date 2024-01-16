@@ -45,16 +45,12 @@ export class PulpitComponent implements OnInit {
     }
   }
 
-  sessionCreateRequest: SessionCreateRequest = {
-    title: '',
-    username: this.tokenService.getUserName(),
-    isshared: false,
-  };
-
   openDialog(): void {
     const dialogRef = this.dialog.open(AddSessionDialogComponent, {
       data: {
         title: '',
+        isshared: false,
+        uploadFilePath: '',
       },
     });
 
@@ -62,9 +58,16 @@ export class PulpitComponent implements OnInit {
       console.log('The dialog was closed');
 
       if (result != undefined) {
-        this.sessionCreateRequest.title = result.title;
+        let sessionCreateRequest: SessionCreateRequest = {
+          username: this.tokenService.getUserName(),
+          title: result.title,
+          isshared: result.isshared,
+        };
 
-        this.sessionService.createSession(this.sessionCreateRequest).subscribe({
+        console.log(result.uploadFilePath);
+        console.log(sessionCreateRequest);
+
+        this.sessionService.createSession(sessionCreateRequest).subscribe({
           next: (value) => {
             console.log(value);
             this.ngOnInit();

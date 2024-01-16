@@ -17,6 +17,7 @@ import { RouterModule } from '@angular/router';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { FormsModule } from '@angular/forms';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [],
@@ -39,6 +40,7 @@ import { FormsModule } from '@angular/forms';
     MatDialogModule,
     MatCardModule,
     FormsModule,
+    MatSlideToggleModule,
   ],
 })
 export class SharedModule {}
