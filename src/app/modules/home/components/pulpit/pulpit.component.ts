@@ -10,6 +10,8 @@ import { TokenService } from 'src/app/modules/core/services/token.service';
 import { UserService } from 'src/app/modules/core/services/user.service';
 import { AddSessionDialogComponent } from '../add-session-dialog/add-session-dialog.component';
 import { WordService } from 'src/app/modules/core/services/word.service';
+import { DialogCloseComponent } from 'src/app/modules/core/components/dialog-close/dialog-close.component';
+import { Subject } from 'rxjs';
 
 export interface DialogData {
   animal: string;
@@ -45,6 +47,15 @@ export class PulpitComponent implements OnInit {
         },
       });
     }
+  }
+
+  openDialog2(title: string, inforrmation: string): void {
+    this.dialog.open(DialogCloseComponent, {
+      data: {
+        title: title,
+        information: inforrmation,
+      },
+    });
   }
 
   openDialog(): void {
@@ -87,6 +98,13 @@ export class PulpitComponent implements OnInit {
               },
               error: (err) => {
                 console.log(err);
+
+                if (err.status == 200) {
+                  this.openDialog2(
+                    'Sukces',
+                    'Utworzono nową sesję oraz dodano słówka do bazy'
+                  );
+                }
               },
             });
 
@@ -97,22 +115,6 @@ export class PulpitComponent implements OnInit {
             isError = true;
           },
         });
-
-        if (isError == false) {
-          // const formData = new FormData();
-          // let file = result.uploadFilePath;
-          // console.log('id = ' + sessionIdTemp);
-          // formData.append('file', file);
-          // console.log(formData);
-          // this.wordService.uploadFile(formData).subscribe({
-          //   next: (value) => {
-          //     console.log(value);
-          //   },
-          //   error: (err) => {
-          //     console.log(err);
-          //   },
-          // });
-        }
       }
     });
   }
