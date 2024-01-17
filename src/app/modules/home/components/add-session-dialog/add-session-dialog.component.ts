@@ -20,11 +20,13 @@ export class AddSessionDialogComponent {
   }
 
   selectedFilePath: string = '';
+  uploadedFilePath: string = '';
 
   onFileSelected(event: any): void {
     const fileInput = event.target;
     if (fileInput.files.length > 0) {
       this.data.uploadFilePath = fileInput.files[0];
+      this.uploadedFilePath = fileInput.files[0].name;
     } else {
       this.selectedFilePath = '';
     }

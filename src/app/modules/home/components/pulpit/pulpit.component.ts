@@ -72,7 +72,24 @@ export class PulpitComponent implements OnInit {
         let isError = false;
         this.sessionService.createSession(sessionCreateRequest).subscribe({
           next: (value) => {
-            console.log(value);
+            const formData = new FormData();
+
+            let file = result.uploadFilePath;
+            let sessionIdTemp = value.id;
+
+            // console.log('id = ' + sessionIdTemp);
+            formData.append('file', file);
+            formData.append('sessionId', sessionIdTemp.toString());
+
+            this.wordService.uploadFile(formData).subscribe({
+              next: (value) => {
+                console.log(value);
+              },
+              error: (err) => {
+                console.log(err);
+              },
+            });
+
             this.ngOnInit();
           },
           error: (err) => {
@@ -81,23 +98,20 @@ export class PulpitComponent implements OnInit {
           },
         });
 
-        if (!isError) {
-          const formData = new FormData();
-
-          let file = result.uploadFilePath;
-
-          formData.append('file', file);
-
-          console.log(formData);
-
-          this.wordService.uploadFile(formData).subscribe({
-            next: (value) => {
-              console.log(value);
-            },
-            error: (err) => {
-              console.log(err);
-            },
-          });
+        if (isError == false) {
+          // const formData = new FormData();
+          // let file = result.uploadFilePath;
+          // console.log('id = ' + sessionIdTemp);
+          // formData.append('file', file);
+          // console.log(formData);
+          // this.wordService.uploadFile(formData).subscribe({
+          //   next: (value) => {
+          //     console.log(value);
+          //   },
+          //   error: (err) => {
+          //     console.log(err);
+          //   },
+          // });
         }
       }
     });

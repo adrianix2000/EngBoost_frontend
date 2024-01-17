@@ -18,7 +18,8 @@
           Prześlij plik
         </button>
         <mat-form-field>
-          <input matInput [(ngModel)]="data.uploadFilePath" />
+          <input hidden matInput [(ngModel)]="data.uploadFilePath" />
+          <input matInput [(ngModel)]="uploadedFilePath" />
         </mat-form-field>
       </div>
       <input
