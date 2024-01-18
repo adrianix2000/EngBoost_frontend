@@ -12,6 +12,7 @@ import { AddSessionDialogComponent } from '../add-session-dialog/add-session-dia
 import { WordService } from 'src/app/modules/core/services/word.service';
 import { DialogCloseComponent } from 'src/app/modules/core/components/dialog-close/dialog-close.component';
 import { Subject } from 'rxjs';
+import { DeleteSessionDialogComponent } from 'src/app/modules/core/components/delete-session-dialog/delete-session-dialog.component';
 
 export interface DialogData {
   animal: string;
@@ -60,6 +61,23 @@ export class PulpitComponent implements OnInit {
         title: title,
         information: inforrmation,
       },
+    });
+  }
+
+  openDeleteDialog(
+    enterAnimationDuration: string,
+    exitAnimationDuration: string
+  ): void {
+    const dialogRef = this.dialog.open(DeleteSessionDialogComponent, {
+      width: '600px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result == 'delete') {
+        console.log('jest zajebisie');
+      }
     });
   }
 

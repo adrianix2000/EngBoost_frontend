@@ -20,7 +20,13 @@
         >
           Pokaż szczegóły
         </button>
-        <button mat-stroked-button color="warn">Usuń</button>
+        <button
+          mat-stroked-button
+          color="warn"
+          (click)="openDeleteDialog('0', '0')"
+        >
+          Usuń
+        </button>
       </mat-card-actions>
     </mat-card>
   </ng-container>

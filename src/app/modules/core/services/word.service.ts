@@ -18,4 +18,18 @@ export class WordService {
       headers: headers,
     });
   }
+
+  getSessionWords(sessionId: number): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + this.tokenService.getToken(),
+    });
+
+    const params = new HttpParams().set('sessionId', sessionId.toString());
+
+    return this.http.get<any>('http://localhost:8080/words/getBySessionId', {
+      headers: headers,
+      params: params,
+    });
+  }
 }

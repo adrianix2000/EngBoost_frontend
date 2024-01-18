@@ -6,9 +6,10 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { RegistrationService } from './services/registration.service';
 import { DialogCloseComponent } from './components/dialog-close/dialog-close.component';
+import { DeleteSessionDialogComponent } from './components/delete-session-dialog/delete-session-dialog.component';
 
 @NgModule({
-  declarations: [NavbarComponent, DialogCloseComponent],
+  declarations: [NavbarComponent, DialogCloseComponent, DeleteSessionDialogComponent],
   providers: [RegistrationService],
   imports: [SharedModule, RouterModule, HttpClientModule],
   exports: [NavbarComponent],
