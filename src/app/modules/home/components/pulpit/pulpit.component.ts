@@ -49,6 +49,11 @@ export class PulpitComponent implements OnInit {
     }
   }
 
+  showSessionDetails(session: Session): void {
+    // console.log(session);
+    this.router.navigate(['/sessions/' + session.id]);
+  }
+
   openDialog2(title: string, inforrmation: string): void {
     this.dialog.open(DialogCloseComponent, {
       data: {
@@ -103,6 +108,11 @@ export class PulpitComponent implements OnInit {
                   this.openDialog2(
                     'Sukces',
                     'Utworzono nową sesję oraz dodano słówka do bazy'
+                  );
+                } else {
+                  this.openDialog2(
+                    'Błąd',
+                    'Utworzono nową sesję, ale nie udało się dodać słówek do bazy, prawdopodobnie podano pusty plik lub nie odpowiedni format pliku'
                   );
                 }
               },

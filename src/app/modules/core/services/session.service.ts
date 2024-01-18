@@ -36,4 +36,18 @@ export class SessionService {
       headers: headers,
     });
   }
+
+  getSessionById(id: number): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + this.tokenService.getToken(),
+    });
+
+    const params = new HttpParams().set('id', id.toString());
+
+    return this.http.get<any>('http://localhost:8080/sessions/getById', {
+      headers: headers,
+      params: params,
+    });
+  }
 }

@@ -1,0 +1,30 @@
+<div class="container">
+  <mat-card class="example-card">
+    <mat-card-header>
+      <mat-card-title>{{ currentSession.title }}</mat-card-title>
+      <mat-card-subtitle>{{ currentSession.username }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="mt-4">
+      <table class="table">
+        <tbody>
+          <tr>
+            <td>Data utworzenia</td>
+            <td>{{ currentSession.createdate }}</td>
+          </tr>
+          <tr>
+            <td>Liczba odwiedziń przez uzytkowników</td>
+            <td>{{ currentSession.viewnumber }}</td>
+          </tr>
+          <tr>
+            <td>Publiczność sesji</td>
+            <td>{{ currentSession.isshared ? "Publiczna" : "Prywatna" }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button>LIKE</button>
+      <button mat-button>SHARE</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

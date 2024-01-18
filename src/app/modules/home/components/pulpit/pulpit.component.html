@@ -11,9 +11,16 @@
         <mat-card-title>{{ session.title }}</mat-card-title>
         <mat-card-subtitle>{{ session.username }}</mat-card-subtitle>
       </mat-card-header>
-      <mat-card-actions>
-        <button mat-button>LIKE</button>
-        <button mat-button>SHARE</button>
+      <mat-card-actions class="mt-4">
+        <button
+          mat-stroked-button
+          style="margin-right: 15px"
+          color="primary"
+          (click)="showSessionDetails(session)"
+        >
+          Pokaż szczegóły
+        </button>
+        <button mat-stroked-button color="warn">Usuń</button>
       </mat-card-actions>
     </mat-card>
   </ng-container>
