@@ -1,0 +1,18 @@
+<div class="container">
+  <h1 mat-dialog-title>Modyfikacja słówka</h1>
+  <div mat-dialog-content>
+    <p>Podaj tytuł sesji np: Mechanical engineering</p>
+    <mat-form-field>
+      <mat-label>znacznie Polskie</mat-label>
+      <input matInput [(ngModel)]="data.polishmean" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>znacznie Angielskie</mat-label>
+      <input matInput [(ngModel)]="data.englishmean" />
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Anuluj</button>
+    <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
+  </div>
+</div>

@@ -10,6 +10,8 @@ import {
 import { wordDto, wordDto2 } from 'src/app/modules/core/models/word.model';
 import { SessionService } from 'src/app/modules/core/services/session.service';
 import { WordService } from 'src/app/modules/core/services/word.service';
+import { ModifyWordDialogComponent } from '../modify-word-dialog/modify-word-dialog.component';
+import { DialogCloseComponent } from 'src/app/modules/core/components/dialog-close/dialog-close.component';
 
 @Component({
   selector: 'app-modify-session',
@@ -118,6 +120,67 @@ export class ModifySessionComponent implements OnInit {
               //this.ngOnInit();
 
               this.wordList = this.wordList.filter((word) => word.id != wordId);
+            }
+          },
+        });
+      }
+    });
+  }
+
+  openDialog(title: string, inforrmation: string) {
+    this.dialog.open(DialogCloseComponent, {
+      data: {
+        title: title,
+        information: inforrmation,
+      },
+    });
+  }
+
+  modifyWord(word: wordDto2): void {
+    const dialogRef = this.dialog.open(ModifyWordDialogComponent, {
+      data: {
+        polishmean: word.polishmean,
+        englishmean: word.englishmean,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result != undefined) {
+        let wordRequest: wordDto2 = {
+          id: word.id,
+          polishmean: result.polishmean,
+          englishmean: result.englishmean,
+        };
+
+        console.log(wordRequest);
+        // word.polishmean = result.polishmean;
+        // word.englishmean = result.englishmean;
+        this.wordService.modifyWord(word.id, wordRequest).subscribe({
+          next: (value) => {
+            console.log(value);
+          },
+          error: (error) => {
+            if (error.status == 200) {
+              console.log(error);
+
+              this.wordList = this.wordList.map((wordtemp) =>
+                wordtemp.id === word.id
+                  ? {
+                      ...wordtemp,
+                      ...{
+                        polishmean: result.polishmean,
+                        englishmean: result.englishmean,
+                      },
+                    }
+                  : wordtemp
+              );
+            } else {
+              if (error.status == 400) {
+                this.openDialog(
+                  'Błąd',
+                  'Nie zmieniono danych słówka, podałeś nie poprawne dane'
+                );
+              }
             }
           },
         });

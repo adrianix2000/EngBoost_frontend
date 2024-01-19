@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { TokenService } from './token.service';
+import { wordDto2 } from '../models/word.model';
 
 @Injectable({
   providedIn: 'root',
@@ -56,6 +57,20 @@ export class WordService {
     const params = new HttpParams().set('wordId', id.toString());
 
     return this.http.delete<any>('http://localhost:8080/words/delete', {
+      headers: headers,
+      params: params,
+    });
+  }
+
+  modifyWord(id: number, word: wordDto2): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + this.tokenService.getToken(),
+    });
+
+    const params = new HttpParams().set('wordId', id.toString());
+
+    return this.http.patch<any>('http://localhost:8080/words/modify', word, {
       headers: headers,
       params: params,
     });

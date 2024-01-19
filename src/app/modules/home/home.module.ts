@@ -7,9 +7,10 @@ import { SharedModule } from '../shared/shared.module';
 import { AddSessionDialogComponent } from './components/add-session-dialog/add-session-dialog.component';
 import { SessionDetailsComponent } from './components/session-details/session-details.component';
 import { ModifySessionComponent } from './components/modify-session/modify-session.component';
+import { ModifyWordDialogComponent } from './components/modify-word-dialog/modify-word-dialog.component';
 
 @NgModule({
-  declarations: [PulpitComponent, AddSessionDialogComponent, SessionDetailsComponent, ModifySessionComponent],
+  declarations: [PulpitComponent, AddSessionDialogComponent, SessionDetailsComponent, ModifySessionComponent, ModifyWordDialogComponent],
   imports: [CommonModule, HomeRoutingModule, SharedModule],
   exports: [PulpitComponent],
 })
