@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import {
@@ -13,6 +13,8 @@ import { WordService } from 'src/app/modules/core/services/word.service';
 import { DialogCloseComponent } from 'src/app/modules/core/components/dialog-close/dialog-close.component';
 import { Subject } from 'rxjs';
 import { DeleteSessionDialogComponent } from 'src/app/modules/core/components/delete-session-dialog/delete-session-dialog.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { FormControl, FormGroup } from '@angular/forms';
 
 export interface DialogData {
   animal: string;
@@ -31,10 +33,16 @@ export class PulpitComponent implements OnInit {
     private sessionService: SessionService,
     private router: Router,
     public dialog: MatDialog,
-    private wordService: WordService
+    private wordService: WordService,
+    private _snackBar: MatSnackBar
   ) {}
 
   userSessions!: Session[];
+  userSessionsRaw!: Session[];
+
+  patternForm = new FormGroup({
+    currentPattern: new FormControl(''),
+  });
 
   ngOnInit(): void {
     if (!this.tokenService.isTokenExists()) {
@@ -45,8 +53,20 @@ export class PulpitComponent implements OnInit {
       this.sessionService.getUsersSessions().subscribe({
         next: (value) => {
           this.userSessions = value;
+          this.userSessionsRaw = value;
+
           console.log(this.userSessions);
           console.log(this.userSessions[0].title);
+        },
+      });
+
+      this.patternForm.controls.currentPattern.valueChanges.subscribe({
+        next: (currentPattern) => {
+          this.userSessions = this.userSessionsRaw.filter((session) => {
+            return session.title.includes(
+              currentPattern == null ? '' : currentPattern
+            );
+          });
         },
       });
     }
@@ -65,6 +85,14 @@ export class PulpitComponent implements OnInit {
       },
     });
   }
+
+  // durationInSeconds = 5;
+  // openSnackBar() {
+  //   console.log('open snack bar');
+  //   this._snackBar.openFromComponent(DeleteSessionDialogComponent, {
+  //     duration: this.durationInSeconds * 1000,
+  //   });
+  // }
 
   openDeleteDialog(
     enterAnimationDuration: string,
