@@ -32,4 +32,32 @@ export class WordService {
       params: params,
     });
   }
+
+  getSessionWords2(sessionId: number): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + this.tokenService.getToken(),
+    });
+
+    const params = new HttpParams().set('sessionId', sessionId.toString());
+
+    return this.http.get<any>('http://localhost:8080/words/getBySessionId2', {
+      headers: headers,
+      params: params,
+    });
+  }
+
+  deleteWord(id: number): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + this.tokenService.getToken(),
+    });
+
+    const params = new HttpParams().set('wordId', id.toString());
+
+    return this.http.delete<any>('http://localhost:8080/words/delete', {
+      headers: headers,
+      params: params,
+    });
+  }
 }

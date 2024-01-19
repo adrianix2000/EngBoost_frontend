@@ -5,7 +5,7 @@ import {
   Session,
   SessionUpdateRequest,
 } from 'src/app/modules/core/models/session.model';
-import { wordDto } from 'src/app/modules/core/models/word.model';
+import { wordDto, wordDto2 } from 'src/app/modules/core/models/word.model';
 import { SessionService } from 'src/app/modules/core/services/session.service';
 import { WordService } from 'src/app/modules/core/services/word.service';
 
@@ -42,7 +42,7 @@ export class ModifySessionComponent implements OnInit {
     createdate: '',
   };
 
-  wordList: wordDto[] = [];
+  wordList: wordDto2[] = [];
   displayedColumns: string[] = ['englishmean', 'polishmean'];
 
   ngOnInit(): void {
@@ -53,7 +53,7 @@ export class ModifySessionComponent implements OnInit {
           this.currentSession = value;
           console.log(this.currentSession);
 
-          this.wordService.getSessionWords(this.currentSession.id).subscribe({
+          this.wordService.getSessionWords2(this.currentSession.id).subscribe({
             next: (value) => {
               this.wordList = value;
               console.log(this.wordList);
@@ -91,5 +91,20 @@ export class ModifySessionComponent implements OnInit {
           console.log(error);
         },
       });
+  }
+
+  deleteWord(wordId: number): void {
+    this.wordService.deleteWord(wordId).subscribe({
+      next: (value) => {
+        console.log(value);
+      },
+      error: (error) => {
+        if (error.status == 200) {
+          //this.ngOnInit();
+
+          this.wordList = this.wordList.filter((word) => word.id != wordId);
+        }
+      },
+    });
   }
 }

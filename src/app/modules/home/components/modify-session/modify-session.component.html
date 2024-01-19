@@ -26,4 +26,43 @@
       Modyfikuj sesję
     </button>
   </form>
+
+  <table class="table table-striped mt-5">
+    <thead>
+      <tr>
+        <th scope="col">znacznie Polskie</th>
+        <th scope="col">znacznie Angielskie</th>
+        <th scope="col">Akcje</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let word of wordList; index as i">
+        <tr>
+          <td>{{ word.polishmean }}</td>
+          <td>{{ word.englishmean }}</td>
+          <td>
+            <button
+              mat-raised-button
+              color="warn"
+              style="margin-right: 20px"
+              (click)="deleteWord(word.id)"
+            >
+              Usuń
+            </button>
+            <button mat-raised-button color="primary">Modyfikuj</button>
+          </td>
+        </tr>
+      </ng-container>
+      <!-- <tr>
+        <td>Jacob</td>
+        <td>Thornton</td>
+        <td>@fat</td>
+      </tr>
+      <tr>
+        <td>Larry</td>
+        <td>the Bird</td>
+        <td>@twitter</td>
+      </tr> -->
+    </tbody>
+  </table>
 </div>
