@@ -40,6 +40,8 @@ export class PulpitComponent implements OnInit {
     if (!this.tokenService.isTokenExists()) {
       this.router.navigate(['/logowanie']);
     } else {
+      console.log('wywokuje inicjalizaj pinassdfsdfsd');
+
       this.sessionService.getUsersSessions().subscribe({
         next: (value) => {
           this.userSessions = value;
@@ -66,7 +68,8 @@ export class PulpitComponent implements OnInit {
 
   openDeleteDialog(
     enterAnimationDuration: string,
-    exitAnimationDuration: string
+    exitAnimationDuration: string,
+    sessionId: number
   ): void {
     const dialogRef = this.dialog.open(DeleteSessionDialogComponent, {
       width: '600px',
@@ -76,7 +79,14 @@ export class PulpitComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result == 'delete') {
-        console.log('jest zajebisie');
+        this.sessionService.deleteSession(sessionId).subscribe({
+          next: (value) => {},
+          error: (err) => {
+            if (err.status == 200) {
+              this.ngOnInit();
+            }
+          },
+        });
       }
     });
   }

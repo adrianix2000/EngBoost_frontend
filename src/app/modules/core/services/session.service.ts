@@ -50,4 +50,18 @@ export class SessionService {
       params: params,
     });
   }
+
+  deleteSession(id: number): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + this.tokenService.getToken(),
+    });
+
+    const params = new HttpParams().set('sessionId', id.toString());
+
+    return this.http.delete<any>('http://localhost:8080/sessions/delete', {
+      headers: headers,
+      params: params,
+    });
+  }
 }
