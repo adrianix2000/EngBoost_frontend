@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
+import { DeleteworddialogComponent } from 'src/app/modules/core/components/deleteworddialog/deleteworddialog.component';
 import {
   Session,
   SessionUpdateRequest,
@@ -18,7 +20,8 @@ export class ModifySessionComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private sessionService: SessionService,
-    private wordService: WordService
+    private wordService: WordService,
+    public dialog: MatDialog
   ) {}
 
   modifySessionForm = new FormGroup({
@@ -93,18 +96,32 @@ export class ModifySessionComponent implements OnInit {
       });
   }
 
-  deleteWord(wordId: number): void {
-    this.wordService.deleteWord(wordId).subscribe({
-      next: (value) => {
-        console.log(value);
-      },
-      error: (error) => {
-        if (error.status == 200) {
-          //this.ngOnInit();
+  openDeleteDialog(
+    enterAnimationDuration: string,
+    exitAnimationDuration: string,
+    wordId: number
+  ): void {
+    const dialogRef = this.dialog.open(DeleteworddialogComponent, {
+      width: '600px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+    });
 
-          this.wordList = this.wordList.filter((word) => word.id != wordId);
-        }
-      },
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result == 'delete') {
+        this.wordService.deleteWord(wordId).subscribe({
+          next: (value) => {
+            console.log(value);
+          },
+          error: (error) => {
+            if (error.status == 200) {
+              //this.ngOnInit();
+
+              this.wordList = this.wordList.filter((word) => word.id != wordId);
+            }
+          },
+        });
+      }
     });
   }
 }

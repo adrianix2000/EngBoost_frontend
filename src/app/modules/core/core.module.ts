@@ -8,9 +8,10 @@ import { RegistrationService } from './services/registration.service';
 import { DialogCloseComponent } from './components/dialog-close/dialog-close.component';
 import { DeleteSessionDialogComponent } from './components/delete-session-dialog/delete-session-dialog.component';
 import { DeleteSessionSnackBarComponent } from './components/delete-session-snack-bar/delete-session-snack-bar.component';
+import { DeleteworddialogComponent } from './components/deleteworddialog/deleteworddialog.component';
 
 @NgModule({
-  declarations: [NavbarComponent, DialogCloseComponent, DeleteSessionDialogComponent, DeleteSessionSnackBarComponent],
+  declarations: [NavbarComponent, DialogCloseComponent, DeleteSessionDialogComponent, DeleteSessionSnackBarComponent, DeleteworddialogComponent],
   providers: [RegistrationService],
   imports: [SharedModule, RouterModule, HttpClientModule],
   exports: [NavbarComponent],

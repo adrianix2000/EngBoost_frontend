@@ -1,0 +1,6 @@
+<h1 mat-dialog-title>Uwaga!</h1>
+<div mat-dialog-content>Czy napewno chcesz usunąć to słówko?</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Nie</button>
+  <button mat-button [mat-dialog-close]="'delete'" cdkFocusInitial>Tak</button>
+</div>
