@@ -94,6 +94,10 @@ export class PulpitComponent implements OnInit {
   //   });
   // }
 
+  modifySession(sessionId: number): void {
+    this.router.navigate(['/modify-session/' + sessionId]);
+  }
+
   openDeleteDialog(
     enterAnimationDuration: string,
     exitAnimationDuration: string,

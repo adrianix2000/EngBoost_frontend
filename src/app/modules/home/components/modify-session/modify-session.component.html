@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="d-flex justify-content-center">
+    <h1>Modyfikuj dane sesji</h1>
+  </div>
+
+  <div class="line-shadow mb-4"></div>
+
+  <form [formGroup]="modifySessionForm" (ngSubmit)="modifySession()">
+    <mat-form-field>
+      <mat-label>Tytuł sesji</mat-label>
+      <input matInput formControlName="title" />
+    </mat-form-field>
+    <div
+      style="display: flex; justify-content: space-between; align-items: center"
+    >
+      <span><h3>Ustaw publiczność sesji</h3></span>
+      <mat-slide-toggle formControlName="isshared"></mat-slide-toggle>
+    </div>
+
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="modifySessionForm.invalid"
+    >
+      Modyfikuj sesję
+    </button>
+  </form>
+</div>

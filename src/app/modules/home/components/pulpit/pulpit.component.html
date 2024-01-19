@@ -25,6 +25,14 @@
           mat-stroked-button
           style="margin-right: 15px"
           color="primary"
+          (click)="modifySession(session.id)"
+        >
+          Modyfikuj dane sesji
+        </button>
+        <button
+          mat-stroked-button
+          style="margin-right: 15px"
+          color="primary"
           (click)="showSessionDetails(session)"
         >
           Pokaż szczegóły

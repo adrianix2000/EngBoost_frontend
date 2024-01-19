@@ -2,7 +2,10 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { TokenService } from './token.service';
 import { Observable } from 'rxjs';
-import { SessionCreateRequest } from '../models/session.model';
+import {
+  SessionCreateRequest,
+  SessionUpdateRequest,
+} from '../models/session.model';
 
 @Injectable({
   providedIn: 'root',
@@ -63,5 +66,23 @@ export class SessionService {
       headers: headers,
       params: params,
     });
+  }
+
+  updateSession(session: SessionUpdateRequest, id: number): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + this.tokenService.getToken(),
+    });
+
+    const params = new HttpParams().set('sessionId', id.toString());
+
+    return this.http.patch<any>(
+      'http://localhost:8080/sessions/modify',
+      session,
+      {
+        headers: headers,
+        params: params,
+      }
+    );
   }
 }

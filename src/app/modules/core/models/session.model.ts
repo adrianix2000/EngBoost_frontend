@@ -12,3 +12,8 @@ export interface SessionCreateRequest {
   username: string;
   isshared: boolean;
 }
+
+export interface SessionUpdateRequest {
+  title: string;
+  isshared: boolean;
+}

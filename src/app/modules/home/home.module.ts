@@ -6,9 +6,10 @@ import { PulpitComponent } from './components/pulpit/pulpit.component';
 import { SharedModule } from '../shared/shared.module';
 import { AddSessionDialogComponent } from './components/add-session-dialog/add-session-dialog.component';
 import { SessionDetailsComponent } from './components/session-details/session-details.component';
+import { ModifySessionComponent } from './components/modify-session/modify-session.component';
 
 @NgModule({
-  declarations: [PulpitComponent, AddSessionDialogComponent, SessionDetailsComponent],
+  declarations: [PulpitComponent, AddSessionDialogComponent, SessionDetailsComponent, ModifySessionComponent],
   imports: [CommonModule, HomeRoutingModule, SharedModule],
   exports: [PulpitComponent],
 })
