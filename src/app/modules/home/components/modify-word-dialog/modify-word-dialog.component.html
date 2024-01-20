@@ -13,6 +13,13 @@
   </div>
   <div mat-dialog-actions>
     <button mat-button (click)="onNoClick()">Anuluj</button>
-    <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
+    <button
+      mat-button
+      [disabled]="data.englishmean.length <= 1 || data.polishmean.length <= 1"
+      [mat-dialog-close]="data"
+      cdkFocusInitial
+    >
+      Ok
+    </button>
   </div>
 </div>

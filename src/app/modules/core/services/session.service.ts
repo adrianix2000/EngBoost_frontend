@@ -85,4 +85,10 @@ export class SessionService {
       }
     );
   }
+
+  getSharedSessions(): Observable<any> {
+    return this.http.get<any>(
+      'http://localhost:8080/sessions/getPublicSessions'
+    );
+  }
 }

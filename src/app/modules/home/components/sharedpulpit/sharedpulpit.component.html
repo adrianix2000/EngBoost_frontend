@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="d-flex justify-content-center">
+    <h1>Sesje udostępnione przez użytkowników</h1>
+  </div>
+
+  <ng-container *ngFor="let session of sessionList; index as i">
+    <mat-card class="mt-4">
+      <mat-card-header>
+        <mat-card-title>{{ session.title }}</mat-card-title>
+        <mat-card-subtitle>{{ session.username }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-actions align="end">
+        <button mat-button (click)="makeTest(session.id)">Rozwiąż test</button>
+      </mat-card-actions>
+    </mat-card>
+  </ng-container>
+</div>

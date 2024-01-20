@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="d-flex">
+    <button mat-raised-button color="accent" (click)="goBack()">Powrót</button>
+    <button mat-raised-button color="primary">start</button>
+  </div>
+
+  <table class="table table-striped mt-5">
+    <thead>
+      <tr>
+        <th scope="col">znacznie Polskie</th>
+        <th scope="col">znacznie Angielskie</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let word of wordList; index as i">
+        <tr>
+          <td>{{ word.polishmean }}</td>
+          <td>{{ word.englishmean }}</td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</div>

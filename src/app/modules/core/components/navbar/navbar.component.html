@@ -11,14 +11,24 @@
       <span>Eng Boost</span>
       <span class="example-spacer"></span>
 
-      <!-- <button
-        *ngIf="!tokenService.isTokenExists"
+      <button
+        *ngIf="showLogoutButton"
         mat-raised-button
         color="primary"
-        routerLink="/logowanie"
+        style="margin-right: 10px"
+        routerLink="/shared"
       >
-        Zaloguj się
-      </button> -->
+        Udostępnione
+      </button>
+      <button
+        *ngIf="showLogoutButton"
+        mat-raised-button
+        color="primary"
+        routerLink="/pulpit"
+        style="margin-right: 10px"
+      >
+        Pulpit
+      </button>
       <button
         *ngIf="showLogoutButton"
         mat-raised-button
