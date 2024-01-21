@@ -27,6 +27,8 @@ export class PretestComponent implements OnInit {
         next: (value) => {
           this.wordList = value;
           console.log(this.wordList);
+
+          this.sessionService.incrementNumberOfViews(id).subscribe({});
         },
         error: (error) => {},
       });

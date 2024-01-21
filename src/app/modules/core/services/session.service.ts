@@ -91,4 +91,22 @@ export class SessionService {
       'http://localhost:8080/sessions/getPublicSessions'
     );
   }
+
+  incrementNumberOfViews(id: number): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + this.tokenService.getToken(),
+    });
+
+    const params = new HttpParams().set('sessionId', id.toString());
+
+    return this.http.patch<any>(
+      'http://localhost:8080/sessions/increment',
+      {},
+      {
+        headers: headers,
+        params: params,
+      }
+    );
+  }
 }

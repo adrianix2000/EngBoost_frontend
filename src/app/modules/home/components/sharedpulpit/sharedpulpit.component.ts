@@ -4,6 +4,7 @@ import { SessionService } from 'src/app/modules/core/services/session.service';
 import { WordService } from 'src/app/modules/core/services/word.service';
 import { OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-sharedpulpit',
@@ -17,14 +18,36 @@ export class SharedpulpitComponent implements OnInit {
     private router: Router
   ) {}
 
+  patternForm = new FormGroup({
+    currentPattern: new FormControl(''),
+  });
+
   sessionList: Session[] = [];
+  sessionListRaw: Session[] = [];
+
   ngOnInit(): void {
     this.sessionService.getSharedSessions().subscribe({
       next: (value) => {
         this.sessionList = value;
+        this.sessionListRaw = value;
         console.log(this.sessionList);
       },
       error: (error) => {},
+    });
+
+    this.patternForm.controls.currentPattern.valueChanges.subscribe({
+      next: (currentPattern) => {
+        this.sessionList = this.sessionListRaw.filter((session) => {
+          return (
+            session.title.includes(
+              currentPattern == null ? '' : currentPattern
+            ) ||
+            session.username.includes(
+              currentPattern == null ? '' : currentPattern
+            )
+          );
+        });
+      },
     });
   }
 
